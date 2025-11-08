@@ -10,19 +10,10 @@ export default function CartModal({ items, open, onClose }) {
     setCart(prev => {
       const qty = (prev[id] || 0) + delta;
       if (qty <= 0) {
-        const newCart = { ...prev };
-        delete newCart[id];
-        return newCart;
+        const { [id]: _, ...rest } = prev;
+        return rest;
       }
       return { ...prev, [id]: qty };
-    });
-  };
-
-  const remove = id => {
-    setCart(prev => {
-      const newCart = { ...prev };
-      delete newCart[id];
-      return newCart;
     });
   };
 
@@ -39,10 +30,8 @@ export default function CartModal({ items, open, onClose }) {
     <div className="cart-overlay" onClick={onClose}>
       <aside className="cart" onClick={e => e.stopPropagation()}>
         <header className="cart__head">
-          <h2>Shopping Cart <span>({count} items)</span></h2>
-          <button className="close" onClick={onClose}>
-            <FiX />
-          </button>
+          <h2>Shopping Cart <span>({count})</span></h2>
+          <button className="close" onClick={onClose}><FiX /></button>
         </header>
 
         {count === 0 ? (
@@ -68,10 +57,8 @@ export default function CartModal({ items, open, onClose }) {
                       <span>{qty}</span>
                       <button onClick={() => update(+id, 1)}><FiPlus /></button>
                     </div>
-                    <p className="subtotal">${(p.price * qty).toFixed(2)}</p>
-                    <button className="del" onClick={() => remove(+id)}>
-                      <FiTrash2 />
-                    </button>
+                    <p className="subtotal">${(p.price * qty).toFixed(0)}</p>
+                    <button className="del" onClick={() => update(+id, -999)}><FiTrash2 /></button>
                   </li>
                 );
               })}
@@ -79,18 +66,12 @@ export default function CartModal({ items, open, onClose }) {
 
             <footer className="cart-foot">
               <div className="total">
-                <span>Total: </span>
-                <strong>${total.toFixed(2)}</strong>
+                <span>Total:</span>
+                <strong>${total.toFixed(0)}</strong>
               </div>
               <div className="actions">
-                <button className="clear-btn" onClick={() => { setCart({}); }}>
-                  Clear Cart
-                </button>
-                <button className="checkout-btn" onClick={() => {
-                  alert('Order placed successfully!');
-                  setCart({});
-                  onClose();
-                }}>
+                <button className="clear-btn" onClick={() => setCart({})}>Clear</button>
+                <button className="checkout-btn" onClick={() => { alert('Order placed!'); setCart({}); onClose(); }}>
                   Checkout
                 </button>
               </div>

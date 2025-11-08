@@ -4,21 +4,16 @@ import '../styles/ProductCard.css';
 
 function Stars({ rating }) {
   const full = Math.floor(rating);
-  const hasDecimal = rating % 1 !== 0;
-  const decimal = Math.round((rating % 1) * 2) / 2; // Half stars
+  const hasHalf = rating % 1 >= 0.5;
   return (
     <div className="stars">
       {[...Array(5)].map((_, i) => (
         <FiStar
           key={i}
           className={
-            i < full 
-              ? 'star filled' 
-              : i === full && hasDecimal && decimal > 0.25 
-                ? (decimal >= 0.75 ? 'star filled' : 'star half') 
-                : 'star'
+            i < full ? 'filled' :
+            i === full && hasHalf ? 'half' : ''
           }
-          size={14}
         />
       ))}
     </div>
@@ -29,12 +24,12 @@ export default function ProductCard({ product, onAdd, onClick }) {
   return (
     <article className="card" onClick={() => onClick(product)}>
       <div className="card__img">
-        <img src={product.image} alt={product.name} loading="lazy" />
-        <span className={`badge in`}>In Stock</span> {/* Always in stock */}
+        <img src={product.image} alt={product.name} />
+        <span className="badge in">In Stock</span>
       </div>
 
       <div className="card__body">
-        <h3 className="card__title" title={product.name}>{product.name}</h3>
+        <h3 className="card__title">{product.name}</h3>
 
         <div className="card__rating">
           <Stars rating={product.rating} />
@@ -45,7 +40,7 @@ export default function ProductCard({ product, onAdd, onClick }) {
 
         <button
           className="card__btn"
-          onClick={e => {
+          onClick={(e) => {
             e.stopPropagation();
             onAdd(product);
           }}

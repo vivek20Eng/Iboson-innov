@@ -1,106 +1,59 @@
 .sidebar {
-  background: var(--surface-color);
-  border-radius: var(--border-radius);
+  background: white;
   padding: 1.5rem;
-  box-shadow: var(--shadow-md);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
   height: fit-content;
   position: sticky;
-  top: 2rem;
+  top: 100px;
 }
 
-.sidebar-header {
+.sidebar__head {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 1.5rem;
 }
 
-.sidebar-header h3 {
-  color: var(--text-primary);
+.sidebar__head h3 {
   font-size: 1.25rem;
   font-weight: 600;
 }
 
-.clear-filters {
-  background: var(--error-color);
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
-  font-size: 0.875rem;
-  font-weight: 500;
-  transition: var(--transition);
-}
-
-.clear-filters:hover {
-  background: #dc2626;
-  transform: translateY(-1px);
-}
-
-.filter-section {
-  margin-bottom: 1.5rem;
-  border: 1px solid var(--border-color);
-  border-radius: var(--border-radius);
-  overflow: hidden;
-}
-
-.filter-section-header {
-  background: var(--surface-color);
-  padding: 1rem;
-  cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  transition: var(--transition);
-  border-bottom: 1px solid var(--border-color);
-}
-
-.filter-section-header:hover {
-  background: #f1f5f9;
-}
-
-.filter-section-header h4 {
-  color: var(--text-primary);
-  font-size: 1rem;
-  font-weight: 600;
-}
-
-.expand-icon {
-  transition: var(--transition);
-  color: var(--text-secondary);
-}
-
-.expand-icon.expanded {
-  transform: rotate(180deg);
-}
-
-.filter-options {
-  padding: 1rem;
-  background: #f8fafc;
-}
-
-.filter-option {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.5rem 0;
-  cursor: pointer;
-  transition: var(--transition);
+.clear-btn {
+  background: none;
+  border: none;
+  color: var(--primary);
   font-size: 0.9rem;
+  text-decoration: underline;
 }
 
-.filter-option:hover {
-  color: var(--primary-color);
+.filter {
+  margin-bottom: 1.5rem;
 }
 
-.filter-option input[type="checkbox"] {
-  width: 16px;
-  height: 16px;
-  accent-color: var(--primary-color);
-  cursor: pointer;
+.filter h4 {
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+  color: var(--text);
 }
 
-.filter-option span {
-  color: var(--text-primary);
+.filter__opt {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+  color: var(--text-light);
+}
+
+.filter__opt input[type="checkbox"] {
+  accent-color: var(--primary);
+}
+
+.price-label {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--text-light);
+  text-align: center;
 }

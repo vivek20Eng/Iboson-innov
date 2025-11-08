@@ -90,7 +90,9 @@ export default function App() {
     setCart(prev => ({ ...prev, [prod.id]: (prev[prod.id] || 0) + 1 }));
   };
 
-  const cartCount = useMemo(() => Object.values(cart).reduce((s, q) => s + q, 0), [cart]);
+  const cartCount = useMemo(() => 
+    Object.values(cart).reduce((s, q) => s + q, 0), [cart]
+  );
   const cartItems = useMemo(() => products.filter(p => cart[p.id] > 0), [products, cart]);
 
   const handleDetail = p => {
