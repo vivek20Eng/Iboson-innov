@@ -1,11 +1,12 @@
 .sidebar {
   background: white;
   padding: 1.5rem;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
   height: fit-content;
   position: sticky;
   top: 100px;
+  min-width: 240px;
 }
 
 .sidebar__head {
@@ -13,47 +14,68 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1.5rem;
+  gap: 10px;
 }
+
 
 .sidebar__head h3 {
   font-size: 1.25rem;
   font-weight: 600;
+  color: #1e293b;
 }
 
 .clear-btn {
-  background: none;
+  background: #eef2ff;
+  color: #6366f1;
   border: none;
-  color: var(--primary);
-  font-size: 0.9rem;
-  text-decoration: underline;
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+  width: fit-content;
 }
 
-.filter {
-  margin-bottom: 1.5rem;
+.clear-btn:hover {
+  background: #6366f1;
+  color: white;
 }
 
 .filter h4 {
   font-size: 1rem;
-  margin-bottom: 0.75rem;
-  color: var(--text);
+  margin: 1.5rem 0 0.75rem;
+  color: #1e293b;
+  font-weight: 600;
 }
 
 .filter__opt {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 0.5rem;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
   font-size: 0.95rem;
-  color: var(--text-light);
+  color: #64748b;
 }
 
 .filter__opt input[type="checkbox"] {
-  accent-color: var(--primary);
+  accent-color: #6366f1;
+  width: 18px;
+  height: 18px;
 }
 
 .price-label {
-  margin-top: 0.5rem;
+  margin-top: 1rem;
   font-size: 0.9rem;
-  color: var(--text-light);
+  color: #64748b;
   text-align: center;
+  font-weight: 500;
+}
+
+/* Mobile – Hide Sidebar */
+@media (max-width: 768px) {
+  .sidebar {
+    display: none;
+  }
 }

@@ -13,13 +13,13 @@ export const fetchProducts = async () => {
       category: product.category,
       image: product.image,
       description: product.description,
-      inStock: true, // API doesn't have stock; set to true for demo
+      inStock: true, 
       rating: product.rating.rate,
       reviewCount: product.rating.count
     }));
   } catch (error) {
     console.error('API Error:', error);
-    return []; // Fallback to empty
+    return []; 
   }
 };
 
@@ -31,11 +31,11 @@ export const fetchCategories = async () => {
     return data;
   } catch (error) {
     console.error('API Error:', error);
-    return ['electronics', "men's clothing", "women's clothing", 'jewelery']; // Fallback
+    return ['electronics', "men's clothing", "women's clothing", 'jewelery']; 
   }
 };
 
-// For related: fetch all and filter (API doesn't support category query directly)
+// For related: fetch all and filter (API doesn't support category query directly---)
 export const getRelatedProducts = async (productId, category, limit = 4) => {
   try {
     const response = await fetch(`${BASE_URL}/products`);

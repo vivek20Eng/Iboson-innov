@@ -8,7 +8,15 @@ export default function Sidebar({ categories, filters, onFilterChange, loading }
 
   if (isMobile || loading) return null;
 
-  const toggleCategory = cat => {
+  const clearFilters = () => {
+    onFilterChange({
+      categories: [],
+      priceRange: [0, 500],
+      inStockOnly: false,
+    });
+  };
+
+  const toggleCategory = (cat) => {
     const newCats = filters.categories.includes(cat)
       ? filters.categories.filter(c => c !== cat)
       : [...filters.categories, cat];
@@ -19,12 +27,11 @@ export default function Sidebar({ categories, filters, onFilterChange, loading }
     <aside className="sidebar">
       <div className="sidebar__head">
         <h3>Filters</h3>
-        <button className="clear-btn" onClick={() => onFilterChange({ categories: [], priceRange: [0, 500], inStockOnly: false })}>
+        <button className="clear-btn" onClick={clearFilters}>
           Clear All
         </button>
       </div>
 
-      {/* Categories */}
       <section className="filter">
         <h4>Category</h4>
         {categories.map(c => (
@@ -34,12 +41,11 @@ export default function Sidebar({ categories, filters, onFilterChange, loading }
               checked={filters.categories.includes(c)}
               onChange={() => toggleCategory(c)}
             />
-            {c.charAt(0).toUpperCase() + c.slice(1)} {/* Capitalize */}
+            {c.charAt(0).toUpperCase() + c.slice(1).replace(/'/g, "'")}
           </label>
         ))}
       </section>
 
-      {/* Price */}
       <section className="filter">
         <h4>Price Range</h4>
         <RangeSlider
@@ -53,14 +59,12 @@ export default function Sidebar({ categories, filters, onFilterChange, loading }
         </div>
       </section>
 
-      {/* Stock - Always true, but keep for spec */}
       <section className="filter">
         <label className="filter__opt">
           <input
             type="checkbox"
             checked={filters.inStockOnly}
             onChange={e => onFilterChange({ ...filters, inStockOnly: e.target.checked })}
-            disabled // Since always true
           />
           In Stock Only
         </label>

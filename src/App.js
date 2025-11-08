@@ -142,7 +142,14 @@ export default function App() {
         onDetail={handleDetail}
       />
 
-      <CartModal items={cartItems} open={showCart} onClose={() => setShowCart(false)} />
-    </div>
+      <CartModal
+  items={products}
+  cart={cart}
+  setCart={setCart}           // PASS SETTER
+  open={showCart}
+  onClose={() => setShowCart(false)}
+/>
+
+      </div>
   );
 }

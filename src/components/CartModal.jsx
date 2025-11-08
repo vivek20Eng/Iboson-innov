@@ -1,10 +1,8 @@
 import React from 'react';
 import { FiX, FiTrash2, FiMinus, FiPlus } from 'react-icons/fi';
-import { useLocalStorage } from '../hooks/useLocalStorage';
 import '../styles/Cart.css';
 
-export default function CartModal({ items, open, onClose }) {
-  const [cart, setCart] = useLocalStorage('cart', {});
+export default function CartModal({ items, cart, setCart, open, onClose }) {
 
   const update = (id, delta) => {
     setCart(prev => {
@@ -31,7 +29,9 @@ export default function CartModal({ items, open, onClose }) {
       <aside className="cart" onClick={e => e.stopPropagation()}>
         <header className="cart__head">
           <h2>Shopping Cart <span>({count})</span></h2>
-          <button className="close" onClick={onClose}><FiX /></button>
+          <button className="close" onClick={onClose} aria-label="Close cart">
+            <FiX />
+          </button>
         </header>
 
         {count === 0 ? (
@@ -53,12 +53,22 @@ export default function CartModal({ items, open, onClose }) {
                       <p className="price">${p.price.toFixed(0)} each</p>
                     </div>
                     <div className="qty-controls">
-                      <button onClick={() => update(+id, -1)}><FiMinus /></button>
+                      <button onClick={() => update(+id, -1)} aria-label="Decrease">
+                        <FiMinus />
+                      </button>
                       <span>{qty}</span>
-                      <button onClick={() => update(+id, 1)}><FiPlus /></button>
+                      <button onClick={() => update(+id, 1)} aria-label="Increase">
+                        <FiPlus />
+                      </button>
                     </div>
                     <p className="subtotal">${(p.price * qty).toFixed(0)}</p>
-                    <button className="del" onClick={() => update(+id, -999)}><FiTrash2 /></button>
+                    <button
+                      className="del"
+                      onClick={() => update(+id, -999)}
+                      aria-label="Remove item"
+                    >
+                      <FiTrash2 />
+                    </button>
                   </li>
                 );
               })}
@@ -70,8 +80,17 @@ export default function CartModal({ items, open, onClose }) {
                 <strong>${total.toFixed(0)}</strong>
               </div>
               <div className="actions">
-                <button className="clear-btn" onClick={() => setCart({})}>Clear</button>
-                <button className="checkout-btn" onClick={() => { alert('Order placed!'); setCart({}); onClose(); }}>
+                <button className="clear-btn" onClick={() => setCart({})}>
+                  Clear Cart
+                </button>
+                <button
+                  className="checkout-btn"
+                  onClick={() => {
+                    alert('Order placed successfully!');
+                    setCart({});
+                    onClose();
+                  }}
+                >
                   Checkout
                 </button>
               </div>
