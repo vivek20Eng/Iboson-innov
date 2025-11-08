@@ -14,7 +14,10 @@
   font-size: 0.9rem;
   transition: all 0.2s;
 }
-
+.page-numbers {
+    gap: 10px;
+    display: flex;
+}
 .pg-btn:hover, .pg-num:hover {
   border-color: var(--primary);
   color: var(--primary);
