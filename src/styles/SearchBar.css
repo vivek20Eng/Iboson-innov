@@ -1,0 +1,109 @@
+/* -------------------------------------------------
+   SearchBar – matches reference design (purple focus)
+   ------------------------------------------------- */
+
+.search {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.search__input {
+  width: 100%;
+  padding: 12px 16px 12px 44px; /* left padding for icon */
+  font-size: 16px;
+  font-weight: 500;
+  color: #1e293b;
+  background: #f8fafc;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  outline: none;
+  transition: all 0.25s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.search__input::placeholder {
+  color: #94a3b8;
+  font-weight: 400;
+}
+
+/* Focus state – purple border */
+.search__input:focus {
+  border-color: #6366f1;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+}
+
+/* Search icon (left) */
+.search__icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #94a3b8;
+  font-size: 18px;
+  pointer-events: none;
+  transition: color 0.2s ease;
+}
+
+.search__input:focus + .search__icon {
+  color: #6366f1;
+}
+
+/* Clear button (right) – appears only when input has value */
+.search__clear {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #e2e8f0;
+  color: #64748b;
+  border: none;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease;
+  font-size: 14px;
+}
+
+.search__clear:hover {
+  background: #cbd5e1;
+  color: #1e293b;
+}
+
+/* Show clear button when input has value */
+.search:has(.search__input:not(:placeholder-shown)) .search__clear,
+.search__input:focus ~ .search__clear {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .search {
+    max-width: 100%;
+  }
+
+  .search__input {
+    padding: 10px 14px 10px 40px;
+    font-size: 15px;
+  }
+
+  .search__icon {
+    left: 12px;
+    font-size: 17px;
+  }
+
+  .search__clear {
+    width: 26px;
+    height: 26px;
+    right: 8px;
+  }
+}
