@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FiX, FiStar, FiPlus } from 'react-icons/fi';
 import { getRelatedProducts } from '../utils/api';
-import ProductCard from './ProductCard';
 import '../styles/Modal.css';
 
 function Stars({ rating }) {
@@ -108,7 +107,7 @@ export default function ProductModal({ product, open, onClose, onAdd, onDetail }
                     className="related-card"
                     onClick={() => {
                       onClose();
-                      setTimeout(() => onDetail(p), 300); // Fixed: onDetail is now defined
+                      setTimeout(() => onDetail(p), 300);
                     }}
                   >
                     <img src={p.image} alt={p.name} />

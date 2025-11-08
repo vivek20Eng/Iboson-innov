@@ -58,21 +58,17 @@ export default function App() {
     if (loading) return [];
     let list = products;
 
-    // Search
     if (search) {
       const lower = search.toLowerCase();
       list = list.filter(p => p.name.toLowerCase().includes(lower));
     }
 
-    // Categories
     if (filters.categories.length) {
       list = list.filter(p => filters.categories.includes(p.category));
     }
 
-    // Price
     list = list.filter(p => p.price >= filters.priceRange[0] && p.price <= filters.priceRange[1]);
 
-    // Stock (always true)
     if (filters.inStockOnly) {
       list = list.filter(p => p.inStock);
     }
@@ -80,12 +76,10 @@ export default function App() {
     return list;
   }, [products, search, filters, loading]);
 
-  // Reset page on filter change
   useEffect(() => {
     setPage(1);
   }, [filtered.length]);
 
-  // Cart Helpers
   const addToCart = prod => {
     setCart(prev => ({ ...prev, [prod.id]: (prev[prod.id] || 0) + 1 }));
   };
@@ -93,7 +87,6 @@ export default function App() {
   const cartCount = useMemo(() => 
     Object.values(cart).reduce((s, q) => s + q, 0), [cart]
   );
-  const cartItems = useMemo(() => products.filter(p => cart[p.id] > 0), [products, cart]);
 
   const handleDetail = p => {
     setDetailProd(p);
@@ -143,13 +136,12 @@ export default function App() {
       />
 
       <CartModal
-  items={products}
-  cart={cart}
-  setCart={setCart}           // PASS SETTER
-  open={showCart}
-  onClose={() => setShowCart(false)}
-/>
-
-      </div>
+        items={products}
+        cart={cart}
+        setCart={setCart}
+        open={showCart}
+        onClose={() => setShowCart(false)}
+      />
+    </div>
   );
 }
