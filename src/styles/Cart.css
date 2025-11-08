@@ -138,6 +138,7 @@ height: 50vh;
   background: #f1f5f9;
   border-radius: 8px;
   padding: 0.25rem;
+  justify-content: space-between;
 }
 
 .qty-controls button {
